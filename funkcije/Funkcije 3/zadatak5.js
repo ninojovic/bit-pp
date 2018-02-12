@@ -1,3 +1,4 @@
+"use strict";
 function returnLast(array, n) {
     var n = n || 1;
     var resultArr = [];

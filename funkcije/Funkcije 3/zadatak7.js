@@ -1,3 +1,4 @@
+"use strict";
 function perfectNum(num){
     var sum = null;
     var perfect = false;

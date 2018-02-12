@@ -1,3 +1,4 @@
+"use strict";
 function valueToArray(x, value){
     var newArray = [];
     var value = value || null;

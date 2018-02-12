@@ -1,3 +1,4 @@
+"use strict";
 var randomString = "My random. string, is the most randomest string! ever?";
 
 function isWordInString(word, string) {
@@ -18,13 +19,13 @@ function isWordInString(word, string) {
             newIndex++;
         }
     }
-
+    
     for (var i = 0; i < wordArray.length; i++) {
         if (wordArray[i] === word) {
             counter++
         }
     }
-
+    
     if (counter > 0) {
         result = "\"" + word + "\" was found " + counter + " times!";
     } else {
@@ -36,5 +37,5 @@ function isWordInString(word, string) {
 console.log(isWordInString("string", randomString));
 
 function isValidSeparator(elem) {
-    return (string[i] !== " ") && (string[i] !== ".") && (string[i] !== ",") && (string[i] !== "!") && (string[i] !== "?");
+    return (elem !== " ") && (elem !== ".") && (elem !== ",") && (elem !== "!") && (elem !== "?");
 }

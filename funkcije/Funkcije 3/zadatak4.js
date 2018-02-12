@@ -1,3 +1,4 @@
+"use strict";
 function reverseNumber(num) {
     var stringNum = num + "";
     var reversedString = "";

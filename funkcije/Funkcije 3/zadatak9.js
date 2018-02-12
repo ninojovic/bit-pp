@@ -1,3 +1,4 @@
+"use strict";
 var randomEMail = "myemailaddress@gmail.com";
 
 function hideEMail(email) {
