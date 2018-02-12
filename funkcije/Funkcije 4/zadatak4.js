@@ -1,3 +1,4 @@
+"use strict";
 var randomArr = [4, 2, 2, -1, 6];
 
 function firstAfterMin(array){

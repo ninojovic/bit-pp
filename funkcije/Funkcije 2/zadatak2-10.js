@@ -1,3 +1,4 @@
+"use strict";
 function firstNLetters(string, n){
     var newString = "";
     for (var i = 0; i < n; i++){

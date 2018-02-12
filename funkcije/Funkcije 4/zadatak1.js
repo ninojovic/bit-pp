@@ -1,3 +1,4 @@
+"use strict";
 var givenArr = [5, -4.2, 3, 7]
 
 function isInArr(num, array){

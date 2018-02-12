@@ -1,3 +1,4 @@
+"use strict";
 var randomArr = [2, 5, -2, 7, -2, 4, 2];
 
 function isSymmetric(array){

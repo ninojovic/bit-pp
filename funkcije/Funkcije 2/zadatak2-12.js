@@ -1,3 +1,4 @@
+"use strict";
 function retireYearsLeft(yearOfBirth, sex){
     var retireYears = 0;
     var error = 0;

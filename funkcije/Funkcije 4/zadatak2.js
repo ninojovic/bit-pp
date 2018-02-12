@@ -1,3 +1,4 @@
+"use strict";
 var randomArr = [-3, 11, 5, 3.4, -8];
 
 function multiplePos(array){

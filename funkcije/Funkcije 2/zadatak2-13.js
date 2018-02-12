@@ -1,7 +1,9 @@
+"use strict";
 function humanizeNumber(num) {
         var lastDigit = num % 10;
         var lastTwoDigits = num % 100;
         var humanized = "";
+        var result;
 
         if (lastDigit === 1 && lastTwoDigits !== 11) {
             result = num + "st";

@@ -1,3 +1,4 @@
+"use strict";
 var newArr = [];
 
 function addArr(arr){

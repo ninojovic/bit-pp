@@ -1,3 +1,4 @@
+"use strict";
 var randomArr1 = [4, 12, 33, 50];
 var randomArr2 = [-12, -32, -41, -55];
 
