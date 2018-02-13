@@ -43,6 +43,6 @@ function sqrStars(arr) {
     return starsString;
 }
 
-var randomArr = ["I'm", "The", "Dumbest", "Man", "Ever", "Born"]
+var randomArr = ["I'm", "The", "Dumbest", "Guy", "Ever", "FUCKIJALKDJLWKJDLAKWJDLK"]
 
 console.log(sqrStars(randomArr));

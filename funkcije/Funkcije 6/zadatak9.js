@@ -20,6 +20,7 @@ function sortArr(arr) {
 function median(arr){
     var sortedArr = sortArr(arr);
     var arrEven = (arr.length % 2 === 0) ? true : false;
+    console.log(sortedArr);
 
     if (!!arrEven) {
         var index1 = arr.length / 2;
