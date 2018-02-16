@@ -1,3 +1,4 @@
+"use strict";
 function stringInArr(string, separator){
     var sep = separator || "-";
     var arr = [];

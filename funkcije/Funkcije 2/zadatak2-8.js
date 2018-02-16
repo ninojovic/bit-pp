@@ -1,3 +1,5 @@
+"use strict";
+"use strict";
 function isPrime(num){
     var counter = 0;
     for (var i=1; i<=num;i++){

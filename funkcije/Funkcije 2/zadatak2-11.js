@@ -1,3 +1,4 @@
+"use strict";
 var givenArr = ["1", "21", undefined, "42", "1e+3", Infinity]
 function stringToNumber(strArr){
     var newArr = [];
@@ -11,4 +12,4 @@ function stringToNumber(strArr){
     console.log(newArr);
 }
 
-stringToInt(givenArr);
+stringToNumber(givenArr);
