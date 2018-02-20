@@ -1,5 +1,3 @@
-
-
 var halfArr = function (arr){
     return (arr.length % 2 === 0) ? "Error" : parseInt(arr.length/2);
 }
