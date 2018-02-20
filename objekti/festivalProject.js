@@ -1,14 +1,15 @@
 "use strict";
 (function (){
 
-    function Genre(name) {
+    function Genre(name, bla) {
         this.name = name;
         this.shortName = (function (){
             return (name[0] + name[name.length-1]).toUpperCase();
         })();
+        this.bla = bla;
     }
 
-    function Movie(title, genre, length) {
+    function Movie(title, genre, length, g) {
         this.title = title;
         this.genre = new Genre(genre);
         this.length = length;
@@ -17,6 +18,7 @@
         }
     }
 
+
     function Program(yyyy,mm,dd) {
         this.unformatedDate = new Date(yyyy,mm,dd);
         this.date = this.unformatedDate.toDateString()
@@ -24,7 +26,7 @@
         this.numberOfMovies = 0;
         this.addMovie = function (movie){
             this.numberOfMovies++;
-            return this.listOfMovies.push(movie);
+            this.listOfMovies.push(movie);
         }
         this.removeLastMovie = function (movie){
             this.numberOfMovies--;
@@ -61,7 +63,19 @@
         }
     }
 
-    var spiderman = new Movie("Spiderman", "Action", 130);
+    function createMovie(title, genre, length) {
+        return new Movie(title, genre, length);
+    }
+
+    function createProgram(yyyy,mm,dd) {
+        return new Program(yyyy,mm,dd);
+    }
+
+    console.log(createMovie("spiderman", "action", 130));
+    
+
+    
+    var spiderman = createMovie("Spiderman", "Action", 130);
     var neighbours = new Movie("Neighbours", "Comedy", 100);
     var stargate = new Movie("Stargate", "SciF", 150);
 

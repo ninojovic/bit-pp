@@ -30,7 +30,7 @@ function person(firstName, lastName, jmbg){
 
 var nebojsa = new person("Nebojsa", "Jovanovic", "1806992710061");
 var nino = new person("Ninoslav", "Jovic", "1607991940079");
-console.log(nino.getPersonalInfo());
+console.log(nebojsa.getPersonalInfo());
 
 
 
