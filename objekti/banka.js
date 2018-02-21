@@ -91,7 +91,7 @@ function createBank(name){
 
 var intesa = createBank("intesa");
 intesa.createMember("Ninoslav", "Jovic", 1607991940079, 608333);
-console.log(intesa.depositMoney(1607991, 500));
+console.log(intesa.depositMoney(, 500));
 console.log(intesa.blockedMembersList);
 console.log(intesa.depositMoney(1607991, 500));
 console.log(intesa.membersList[0].cardsList);
