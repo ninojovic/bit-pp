@@ -49,7 +49,8 @@
     Player.prototype.constructor = Player;
     
     Player.prototype.getPlayerData = function () {
-        return this.country.formatedCountry + ", " + this.country.odds * this.betAmount + " eur, " + this.getData() + " years";
+        var getInfo = Object.getPrototypeOf(Player.prototype).getData.call(this);
+        return this.country.formatedCountry + ", " + this.country.odds * this.betAmount + " eur, " + getInfo + " years";
     }
 
     // console.log(Player.prototype.constructor === Person.prototype.constructor);
@@ -155,6 +156,6 @@
     fifa.addBettingPlace(terazije);
     fifa.addBettingPlace(rio);
 
-    //console.log(fifa.getData());
+    console.log(fifa.getData());
     
 })();
