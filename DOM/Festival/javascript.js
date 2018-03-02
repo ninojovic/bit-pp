@@ -65,7 +65,7 @@ Program.prototype.getData = function () {
 
     for (var i = 0; i < movies.length; i++) {
         var movie = movies[i];
-        outputStr += "\t\t" + movie.getData() + "\n" + "</br>";
+        outputStr += "</br>" + "\t\t" + movie.getData() + "\n";
     }
 
     return outputStr;
