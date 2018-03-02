@@ -40,8 +40,9 @@ input[type="button"] {
     background: blueviolet;
     color: white;
     padding: 10px;
-    width: 30%;
+    width: 20%;
     font-weight: bold;
+    height: 40px;
 }
 
 label {
