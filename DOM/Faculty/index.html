@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <container>
+        <div>
+            <form>
+                <label for="facultyName">Faculty Name</label>
+                <input type="text" id="facultyName">
+                <input type="button" id="createFacBtn" value="Create Faculty">
+            </form>
+            <ol>
+            </ol>
+            <form>
+                <label for="selectFaculty">Select Faculty</label>
+                <select name="selectFaculty" id="selectFaculty">
+                    <option>-</option>
+                </select>
+                <input type="button" id="addStudent" value="Add Student">
+                <input type="button" id="addProfessor" value="Add Professor">
+            </form>
+        </div>
+        <div>
+            <form>
+                <label for="subject">Subject</label>
+                <input type="text" id="subject">
+                <label for="selectProfessor">Select Professor</label>
+                <select name="selectProfessor" id="selectProfessor">
+                    <option>-</option>
+                </select>
+                <label for="examDate">Exam Date</label>
+                <input type="date" id="examDate">
+                <input type="button" id="createExam" value="Create Exam">
+            </form>
+        </div>
+        <div id="studentDiv">
+            <form id="studentForm">
+                <label for="studentName">Student Name</label>
+                <input type="text" id="studentSurname">
+                <label for="studentSurname">Student Surname</label>
+                <input type="text" id="facultyName">
+                <label for="indexNumber">Index Number</label>
+                <input type="number" id="indexNumber">
+                <label for="studentStatus">Select Status</label>
+                <select name="status" id="studentStatus">
+                    <option>-</option>
+                    <option>Regular</option>
+                    <option>Remote</option>
+                    <option>Graduated</option>
+                </select>
+                <input type="button" id="createStudent" value="Add Student">
+            </form>
+        </div>
+        <div id="professorDiv">
+            <form id="professorForm">
+                <label for="professorName">Professor Name</label>
+                <input type="text" id="professorSurname">
+                <label for="professorSurname">Professor Surname</label>
+                <input type="text" id="employeeId">
+                <label for="employeeId">Employee ID</label>
+                <input type="number" id="employeeId">
+                <label for="salary">Salary</label>
+                <input type="number" id="officeNumber">
+                <label for="officeNumber">Office Number</label>
+                <input type="number" id="salary">
+                <input type="button" id="createProfessor" value="Add Professor">
+            </form>
+        </div>
+    </container>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>

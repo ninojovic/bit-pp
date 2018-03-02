@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+container {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+div {
+    display: inline-block;
+    width: 48%;
+    padding: 20px;
+    background: gainsboro;
+    border-radius: 10px;
+    height: 450px;
+    margin: 10px;
+    vertical-align: top;
+}
+
+input {
+    width: 70%;
+    display: block;
+    margin: 10px auto;
+    border-radius: 10px;
+    height: 30px;
+    text-align: center;
+}
+
+input[type="button"] {
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: 1px solid black;
+    background: blueviolet;
+    color: white;
+    padding: 10px;
+    width: 30%;
+    font-weight: bold;
+}
+
+label {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+ol {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+select {
+    display: block;
+    margin: 20px auto;
+    width: 50%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+li {
+    font-size: 1.5rem;
+    color: red;
+}
+
+#studentDiv {
+    display: none;
+}
+
+#professorDiv {
+    display: none;
+}
