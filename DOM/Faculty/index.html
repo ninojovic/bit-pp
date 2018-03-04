@@ -11,15 +11,16 @@
 
 <body>
     <container>
+        <background></background>
         <div>
-            <form>
+            <form id="facultyForm">
                 <label for="facultyName">Faculty Name</label>
-                <input type="text" id="facultyName">
+                <input type="text" id="facultyName" required>
                 <input type="button" id="createFacBtn" value="Create Faculty">
             </form>
             <ol>
             </ol>
-            <form>
+            <form id="selectFacultyForm">
                 <label for="selectFaculty">Select Faculty</label>
                 <select name="selectFaculty" id="selectFaculty">
                     <option>-</option>
@@ -57,6 +58,7 @@
                     <option>Graduated</option>
                 </select>
                 <input type="button" id="createStudent" value="Add Student">
+                <input type="button" id="cancelStudent" value="Cancel">
             </form>
         </div>
         <div id="professorDiv">
@@ -72,9 +74,67 @@
                 <label for="officeNumber">Office Number</label>
                 <input type="text" id="officeNumber">
                 <input type="button" id="createProfessor" value="Add Professor">
+                <input type="button" id="cancelProfessor" value="Cancel">
+            </form>
+        </div>
+
+        <div id="studentExamDiv">
+            <form id="studentExamForm">
+                <label for="selectFacultyExam">Select Faculty</label>
+                <select name="selectFacultyExam" id="selectFacultyExam">
+                    <option>-</option>
+                </select>
+                <label for="selectStudent">Select Student</label>
+                <select name="selectStudent" id="selectStudent">
+                    <option>-</option>
+                </select>
+                <label for="selectExam">Select Exam</label>
+                <select name="selectExam" id="selectExam">
+                    <option>-</option>
+                </select>
+                <label for="grade">Select Grade</label>
+                <grade>
+                    <input type="radio" name="grade" value="5">
+                    <label>5</label>
+                </grade>
+                <grade>
+                    <input type="radio" name="grade" value="6">
+                    <label>6</label>
+                </grade>
+                <grade>
+                    <input type="radio" name="grade" value="7">
+                    <label>7</label>
+                </grade>
+                <grade>
+                    <input type="radio" name="grade" value="8">
+                    <label>8</label>
+                </grade>
+                <grade>
+                    <input type="radio" name="grade" value="9">
+                    <label>9</label>
+                </grade>
+                <grade>
+                    <input type="radio" name="grade" value="10">
+                    <label>10</label>
+                </grade>
+                <input type="button" id="addStudentExam" value="Add Exam to student">
+            </form>
+        </div>
+        <div id="infoDiv">
+            <form id="infoForm">
+                <label for="selectFacultyInfo">Select Faculty</label>
+                <select name="selectFacultyInfo" id="selectFacultyInfo">
+                    <option>-</option>
+                </select>
+                <label for="selectStudentInfo">Select student to get info</label>
+                <select name="selectStudentInfo" id="selectStudentInfo">
+                    <option>-</option>
+                </select>
+                <input type="button" id="getInfo" value="Get Info">
             </form>
         </div>
     </container>
     <script type="text/javascript" src="app.js"></script>
 </body>
+
 </html>

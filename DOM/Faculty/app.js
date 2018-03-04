@@ -42,15 +42,23 @@ Professor.prototype.getProfessorData = function () {
 function Exam(subject, professor, date, grade) {
     this.subject = subject;
     this.professor = professor;
-    this.date = new Date(date);
-    this.grade = grade || null;
+    this.unformatedDate = new Date(date);
+    this.date = this.getFormatedDate();
+    this.grade = grade || "TBD";
 }
 
 Exam.prototype.getExamData = function () {
-    //formatted string as first consonant of first word in subject name, date (in format dd.mm.yyyy.), status and grade
     var subjectNameLetter = this.subject.getFirstConsonant();
-    var formatedDate = this.date.getDate() + "." + (this.date.getMonth() - 1) + "." + this.date.getFullYear();
-    return subjectNameLetter + ", " + formatedDate + ", " + this.status + ", " + this.grade;
+    return subjectNameLetter + ", " + this.getFormatedDate() + ", " + this.status + ", " + this.grade;
+}
+
+Exam.prototype.getFormatedDate = function () {
+    var formatedDate = this.unformatedDate.getDate() + "." + (this.unformatedDate.getMonth() - 1) + "." + this.unformatedDate.getFullYear();
+    return formatedDate;
+}
+
+Exam.prototype.getExamInfo = function () {
+    return this.subject + ", profesor: " + this.professor.name + " " + this.professor.surname;
 }
 
 
@@ -67,11 +75,38 @@ Student.prototype.constructor = Student;
 
 Student.prototype.addNewExam = function (exam, grade) {
     var newExam = Object.assign({}, exam);
-    newExam.grade = grade;
+    newExam.grade = parseInt(grade);
+
     if (newExam.grade > 5) {
         this.listOfPassedExams.push(newExam);
+        return true;
+    } else {
+        return false;
     }
-    //When adding exam in previous method take care that grade must be greater than 5 and that we can not have more than 2 passed exams at same professor. Take care if exam is already in the list of passed exam (when student attends exam again) in that case you should replace data of that exam with new data.
+}
+
+Student.prototype.replaceExam = function (exam, grade, index) {
+    var newExam = Object.assign({}, exam);
+    newExam.grade = parseInt(grade);
+    this.listOfPassedExams[index] = newExam;
+    return false;
+}
+
+Student.prototype.getArrayOfExamInfo = function () {
+    var newArr = [];
+    this.listOfPassedExams.forEach(function (elem) {
+        var innerArr = [];
+        innerArr.push(elem.subject);
+        innerArr.push(elem.professor.name + " " + elem.professor.surname);
+        innerArr.push(elem.grade);
+        innerArr.push(elem.date);
+        newArr.push(innerArr);
+    })
+    return newArr;
+}
+
+Student.prototype.getStudentInfo = function () {
+    return this.name + " " + this.surname + ", index number: " + this.indexNumber;
 }
 
 Student.prototype.getStudentData = function () {
@@ -83,7 +118,7 @@ Student.prototype.getAverageGrade = function () {
     this.listOfPassedExams.forEach(function (elem) {
         average += elem.grade;
     })
-    return average / this.listOfPassedExams.length;
+    return (average / this.listOfPassedExams.length).toFixed(1);
 }
 
 Student.prototype.getStudentTenGrades = function () {
@@ -173,6 +208,7 @@ var studentName = document.querySelector("#studentName");
 var studentSurname = document.querySelector("#studentSurname");
 var indexNumber = document.querySelector("#indexNumber");
 var studentStatus = document.querySelector("#studentStatus");
+var cancelStudentForm = document.querySelector("#cancelStudent");
 
 //PROFESSOR FORM SELECTORS
 var professorName = document.querySelector("#professorName");
@@ -180,59 +216,145 @@ var professorSurname = document.querySelector("#professorSurname");
 var professorEmployeeId = document.querySelector("#employeeId");
 var professorSalary = document.querySelector("#salary");
 var professorOfficeNumber = document.querySelector("#officeNumber");
+var cancelProfessorForm = document.querySelector("#cancelProfessor");
+
+//ADD EXAM TO STUDENT FORM SELECTORS
+var selectFacultyExamForm = document.querySelector("#selectFacultyExam");
+var addStudentExamBtn = document.querySelector("#addStudentExam");
+var selectStudent = document.querySelector("#selectStudent");
+var selectExam = document.querySelector("#selectExam");
+var selectGradeList = document.querySelectorAll("input[type='radio']");
+
+//GET STUDENT INFO FORM SELECTORS
+var selectFacultyInfo = document.querySelector("#selectFacultyInfo");
+var selectStudentInfo = document.querySelector("#selectStudentInfo");
+var getStudentInfoBtn = document.querySelector("#getInfo");
+
+//STUDENT FORM TOGGLE SELECTORS
+var studentFormDiv = document.querySelector("#studentDiv");
+var professorFormDiv = document.querySelector("#professorDiv");
+var backgroundFormDiv = document.querySelector("background");
 
 //STUDENT FORM TOGGLE FUNCTIONS
-var showStudentDiv = function () { document.querySelector("#studentDiv").style.display = "block" };
-var hideStudentDiv = function () { document.querySelector("#studentDiv").style.display = "none" };
+var showStudentDiv = function () {
+    studentFormDiv.style.display = "block";
+    backgroundFormDiv.style.display = "block"
+
+};
+
+var hideStudentDiv = function () {
+    studentFormDiv.style.display = "none";
+    backgroundFormDiv.style.display = "none"
+};
 
 //PROFESSOR FORM TOGGLE FUNCTIONS
-var showProfessorDiv = function () { document.querySelector("#professorDiv").style.display = "block" };
-var hideProfessorDiv = function () { document.querySelector("#professorDiv").style.display = "none" };
+var showProfessorDiv = function () {
+    professorFormDiv.style.display = "block";
+    backgroundFormDiv.style.display = "block"
+};
+
+var hideProfessorDiv = function () {
+    professorFormDiv.style.display = "none";
+    backgroundFormDiv.style.display = "none"
+};
 
 //CREATE FACULTY EVENT HANDLER
 createFacBtn.addEventListener("click", function () {
-    var newFac = createFaculty(facNameInput.value);
-    var newFacOption = document.createElement("option");
-    newFacOption.textContent = newFac.name;
+    if (!isValidForm("#facultyForm")) {
+        alert("Please fill all the required fields!")
+        return false;
+    }
 
-    newFacOption.value = listOfFaculties.push(newFac) - 1;
+    var newFac = createFaculty(facNameInput.value);
+
+    var newFacListIndex = listOfFaculties.push(newFac) - 1;
+
+    function createFacultyOption() {
+        var newFacOption = document.createElement("option");
+        newFacOption.textContent = newFac.name;
+        newFacOption.value = newFacListIndex;
+
+        return newFacOption;
+    }
+
+
     var newFacListItem = document.createElement("li");
     newFacListItem.textContent = newFac.name;
 
-    selectFac.appendChild(newFacOption);
+    function facultyExistCallback(facultyInList) {
+        return facultyInList.name === newFac.name;
+    }
+
+    selectFac.appendChild(createFacultyOption());
+    selectFacultyExamForm.appendChild(createFacultyOption());
+    selectFacultyInfo.appendChild(createFacultyOption());
     facultyList.appendChild(newFacListItem);
     facNameInput.value = "";
 })
 
 //ADD STUDENT FORM TOGGLE
 addStudentFormBtn.addEventListener("click", function () {
-    hideProfessorDiv();
+    if (!isValidForm("#selectFacultyForm")) {
+        alert("Please fill all the required fields!")
+        return false;
+    }
     showStudentDiv();
 })
 
 //ADD PROFESSOR FORM TOGGLE
 addProfessorFormBtn.addEventListener("click", function () {
-    hideStudentDiv();
+    if (!isValidForm("#selectFacultyForm")) {
+        alert("Please select Faculty")
+        return false;
+    }
     showProfessorDiv();
 })
 
+//CANCEL STUDENT FORM TOGGLE
+cancelStudentForm.addEventListener("click", hideStudentDiv);
+
+//CANCEL PROFESSOR FORM TOGGLE
+cancelProfessorForm.addEventListener("click", hideProfessorDiv);
+
 //CREATE EXAM EVENT HANDLER
 createExamBtn.addEventListener("click", function () {
+    if (!isValidForm("#examForm")) {
+        alert("Please select Faculty")
+        return false;
+    }
     var selectedFac = listOfFaculties[selectFac.value];
 
-    var newExam = new Exam(examSubject.value, selectedFac.listOfProfessors[examProfSelect.value-1], examDate.value);
+    var newExam = new Exam(examSubject.value, selectedFac.listOfProfessors[examProfSelect.value - 1], examDate.value);
 
-    if (selectedFac.listOfExams.objExists(newExam, subject)) {
-        alert("that exam already exists");
-        return
+    function examExistCallback(examInList) {
+        var sameSubject = examInList.subject === newExam.subject;
+        var sameProfessor = examInList.professor.employeeId === newExam.professor.employeeId;
+        return sameSubject && sameProfessor;
     }
 
+    if (selectedFac.listOfExams.containsElement(examExistCallback)) {
+        alert("that exam already exists");
+        return false;
+    }
+
+    var examListIndex = selectedFac.listOfExams.push(newExam) - 1;
+
+    var newExamOption = document.createElement("option");
+    newExamOption.textContent = newExam.getExamInfo();
+    newExamOption.value = examListIndex;
+
+    selectExam.appendChild(newExamOption);
+
     document.querySelector("#examForm").reset();
-    selectedFac.listOfExams.push(newExam);
 })
 
 //CREATE STUDENT EVENT HANDLER
 createStudentBtn.addEventListener("click", function () {
+    if (!isValidForm("#studentForm")) {
+        alert("Please fill all the required fields!")
+        return false;
+    }
+
     var newStudent = new Student(studentName.value,
         studentSurname.value,
         parseInt(indexNumber.value),
@@ -241,13 +363,27 @@ createStudentBtn.addEventListener("click", function () {
 
     var selectedFac = listOfFaculties[selectFac.value];
 
-    if (selectedFac.listOfStudents.objExists(newStudent, indexNumber)) {
-        alert("student with that index number already exist");
-        return
+    function studentExistCallback(studentInList) {
+        return studentInList.indexNumber === newStudent.indexNumber;
     }
 
-    selectedFac.listOfStudents.push(newStudent);
+    if (selectedFac.listOfStudents.containsElement(studentExistCallback)) {
+        alert("student with that index number already exist");
+        return false;
+    }
 
+    var studentListIndex = selectedFac.listOfStudents.push(newStudent) - 1;
+
+    function createStudentOption() {
+        var newStudentOption = document.createElement("option");
+        newStudentOption.textContent = newStudent.getStudentInfo();
+        newStudentOption.value = studentListIndex;
+        return newStudentOption;
+    }
+
+
+    selectStudent.appendChild(createStudentOption());
+    selectStudentInfo.appendChild(createStudentOption());
 
     document.querySelector("#studentForm").reset();
     hideStudentDiv();
@@ -255,6 +391,10 @@ createStudentBtn.addEventListener("click", function () {
 
 //CREATE PROFESSOR EVENT HANDLER
 createProfessorBtn.addEventListener("click", function () {
+    if (!isValidForm("#professorForm")) {
+        alert("Please fill all the required fields!")
+        return false;
+    }
     var newProfessor = new Professor(
         professorName.value,
         professorSurname.value,
@@ -272,9 +412,13 @@ createProfessorBtn.addEventListener("click", function () {
 
     var selectedFac = listOfFaculties[selectFac.value];
 
-    if (selectedFac.listOfProfessors.objExists(newProfessor, employeeId)) {
+    function professorExistCallback(professorInList) {
+        return professorInList.employeeId === newProfessor.employeeId;
+    }
+
+    if (selectedFac.listOfProfessors.containsElement(professorExistCallback)) {
         alert("professor with that employee ID already exist");
-        return
+        return false;
     }
 
     selectedFac.listOfProfessors.push(newProfessor);
@@ -283,17 +427,146 @@ createProfessorBtn.addEventListener("click", function () {
     hideProfessorDiv();
 })
 
-//ARRAY PROTOTYPE FUNCTION THAT CHECKS IF OBJECT ALREADY EXISTS IN ARRAY
-Array.prototype.objExists = function (obj, propertie) {
-    var exist = 0;
-    this.forEach(function (element) {
-        if (element.propertie === obj.propertie) {
-            exist++;
+//ADD EXAM TO STUDENT EVENT HANDLER
+addStudentExamBtn.addEventListener("click", function () {
+    if (!isValidForm("#studentExamForm")) {
+        alert("Please fill all the required fields!")
+        return false;
+    }
+
+    var selectedFac = listOfFaculties[selectFacultyExamForm.value];
+    var selectedStudent = selectedFac.listOfStudents[selectStudent.value];
+    var selectedExam = selectedFac.listOfExams[selectExam.value];
+
+    function getCheckedRadio() {
+        var checkedValue = null;
+        selectGradeList.forEach(function (elem) {
+            if (elem.checked) {
+                ;
+                checkedValue = elem.value;
+            }
+        })
+        return checkedValue;
+    }
+
+    var grade = getCheckedRadio();
+
+    //CHECK IF EXAM EXISTS AND IF IT IS REPLACE OLD EXAM WITH NEW
+    function passedExamExistsCallback(examInList) {
+        var sameSubject = examInList.subject === selectedExam.subject;
+        var sameProfessor = examInList.professor === selectedExam.professor;
+        return sameSubject && sameProfessor;
+    }
+
+    if (selectedStudent.listOfPassedExams.containsElement(passedExamExistsCallback)) {
+        selectedStudent.listOfPassedExams.forEach(function (e, i) {
+            if (e.subject === selectedExam.subject && e.professor === selectedExam.professor) {
+                selectedStudent.replaceExam(selectedExam, grade, i);
+                return false;
+            }
+        })
+    } else {
+        var success = selectedStudent.addNewExam(selectedExam, grade);
+        if (!success) {
+            alert("Can't add exam if student didn't passed!");
+            return false;
+        }
+    }
+    
+    document.querySelector("#studentExamForm").reset();
+})
+
+//GETTING STUDENT INFO EVENT HANDLER
+getStudentInfoBtn.addEventListener("click", function () {
+    var selectedFaculty = listOfFaculties[selectFacultyInfo.value];
+    var selectedStudent = selectedFaculty.listOfStudents[selectStudentInfo.value];
+    var tableHeadArray = ["Name", "Surname", "Status", "Index Number", "Average Grade"];
+    var examInfoArray = ["subject", "professor", "grade", "date"];
+    var studentInfoArray = [selectedStudent.name,
+    selectedStudent.surname,
+    selectedStudent.status,
+    selectedStudent.indexNumber,
+    selectedStudent.getAverageGrade()
+    ];
+
+
+    //CREATING TABLE WITH STUDENT INFO
+    var table = document.createElement("table");
+
+    var createEl = function (tableElem) { return document.createElement(tableElem) };
+
+    //APPENDING STUDENT INFO
+    for (var i = 0; i < 2; i++) {
+        var tableRow = createEl("tr");
+        if (i === 0) {
+            tableHeadArray.forEach(function (elem) {
+                var tableHead = createEl("th");
+                tableHead.textContent = elem;
+                tableRow.appendChild(tableHead);
+            })
+        } else {
+            studentInfoArray.forEach(function (elem) {
+                var tableData = createEl("td");
+                tableData.textContent = elem;
+                tableRow.appendChild(tableData);
+            })
+        }
+        table.appendChild(tableRow);
+    }
+
+    //APPENDING EXAM INFO
+    for (var i = 0; i < 2; i++) {
+        if (i === 0) {
+            var tableRow = createEl("tr");
+            examInfoArray.forEach(function (elem) {
+                var tableHead = createEl("th");
+                tableHead.textContent = elem;
+                tableRow.appendChild(tableHead);
+            })
+            table.appendChild(tableRow);
+        } else {
+            selectedStudent.getArrayOfExamInfo().forEach(function (elem) {
+                var tableRow = createEl("tr");
+                elem.forEach(function (e) {
+                    var tableData = createEl("td");
+                    tableData.textContent = e;
+                    tableRow.appendChild(tableData);
+                })
+                table.appendChild(tableRow);
+            })
+        }
+    }
+
+    if (document.querySelector("table")) {
+        var tableToRemove = document.querySelector("table");
+        document.querySelector("#infoDiv").removeChild(tableToRemove);
+    }
+
+    document.querySelector("#infoDiv").appendChild(table);
+})
+
+//ARRAY METHOD THAT CHECKS IF ELEMENT ALREADY EXISTS
+Array.prototype.containsElement = function (callback) {
+    var contains = 0;
+    this.forEach(function (e) {
+        if (callback(e)) {
+            contains++;
         }
     })
-    return (exist === 0) ? false : true;
+    return contains !== 0;
 }
 
-
-
-
+//FUNCTION THAT CHECKS IF FORM IS FILLED
+function isValidForm(formSelector) {
+    var formList = document.querySelectorAll(formSelector + " input, " + formSelector + " select");
+    var invalid = 0;
+    formList.forEach(function (element) {
+        if (element.value === "" || element.value === "-") {
+            element.style.border = "solid 3px red";
+            invalid++;
+        } else {
+            element.style.border = "solid 1px gray";
+        }
+    })
+    return invalid === 0;
+}
