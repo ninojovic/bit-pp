@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <body>
+        <h1>Movie festival</h1>
+        <form method='post'><input type='hidden' name='form-name' value='form 1' />
+            <fieldset name="movie">
+                <p>Please fill in the form</p>
+                <p>Movie</p>
+                <fieldset>
+                    <!-- Title input -->
+                    <label>Title</label>
+                    <input type="text" name="movie-title" class="movie-title" placeholder="Title" required>
+    
+                    <!-- Movie length input -->
+                    <label>Length (min)</label>
+                    <input type="number" name="movie-length" class="movie-length" placeholder="Length in min" required>
+    
+                    <!-- Genre select dropdown  -->
+                    <select name="genre-select" class="genre-select">
+                        <option value="">-</option>
+                        <option value="drama">Drama</option>
+                        <option value="action">Action</option>
+                        <option value="horror">Horror</option>
+                        <option value="commedy">Commedy</option>
+                    </select>
+    
+                    <!-- Error message initialy empty -->
+                    <div class="movie-error error"></div>
+    
+    
+                    <!-- Create movie button -->
+                    <input type="button" class="create-movie" value="Create movie">
+    
+                    <!-- Movie list place holder -->
+                    <div >
+                        <ul class="movie-list">
+
+                        </ul>
+                    </div>
+                </fieldset>
+    
+                <p>Program</p>
+    
+                <fieldset>
+                    <label>Date</label>
+                    <input type="date" name="program-date" class="program-date">
+    
+                    <!-- Error message initialy empty -->
+                    <div class="program-error error"></div>
+    
+                    <input type="button" class="create-program" value="Create program">
+                    <div>
+                        <ol class="program-list">
+
+                        </ol>
+                    </div>
+    
+                    <hr>
+    
+                    <label for="movie-select">Movie</label>
+                    <select name="movie-select" class="movie-select">
+                        <option value="">-</option>
+                    </select>
+    
+                    <label for="program-select">Program</label>
+                    <select name="program-select" class="program-select">
+                        <option value="">-</option>
+                    </select>
+    
+                    <div class="assign-error error"></div>
+    
+                    <input type="button" class="add-movie" value="Add movie to program">
+                </fieldset>
+        </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+    <script type="text/javascript" src="js/validate.js"></script>
+    <script type="text/javascript" src="js/uiModule.js"></script>
+    <script type="text/javascript" src="js/dataModule.js"></script>
+    <script type="text/javascript" src="js/controllerModule.js"></script>
+</body>
+
+</html>
