@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h2>Exam statistics June</h2>
+            <h3>Total students: </h3>
+
+            <div class="passed">
+                <h5>PASSED</h5>
+                <p class="student-passed-chart"></p>
+            </div>
+
+            <div class="failed">
+                <h5>FAILED</h5>
+                <p class="student-failed-chart"></p>
+            </div>
+        </div>
+        <form>
+            <select class="select-subject">
+                <option>C#</option>
+                <option>C++</option>
+                <option>JS</option>
+                <option>Java</option>
+            </select>
+
+            <input type="text" class="student-name" placeholder="Name Surname">
+            <input type="number" class="exam-grade" placeholder="Grade">
+            <input type="button" class="add-button" value="ADD">
+        </form>
+
+        <ol class="student-passed">
+            PASSED
+        </ol>
+
+
+        <ol class="student-failed">
+            FAILED
+        </ol>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/form.js"></script>
+    <script type="text/javascript" src="js/subject.js"></script>
+    <script type="text/javascript" src="js/exam.js"></script>
+    <script type="text/javascript" src="js/student.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+
+</html>

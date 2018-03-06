@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header {
+    background-image: url("https://i.pinimg.com/originals/c2/fe/22/c2fe22c2ebacb475339e961ffcb1f861.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 40px;
+}
+
+.passed, .failed {
+    display: block;
+    margin: 10px auto;
+    width: 30%;
+    text-align: left;
+    padding: 10px;
+    font-size: 0.8rem;
+}
+
+.passed {
+    background: gray;
+}
+
+.failed {
+    background: red;
+}
+
+form {
+    display: block;
+    margin: 0 auto;
+    background: whitesmoke;
+    padding: 10px;
+}
+
+input, select {
+    border-radius: 2px;
+    border: 1px solid gray;
+    padding: 5px;
+    margin: 5px;
+}
+
+input[type="button"] {
+    width: 100px;
+}
+
+ol {
+    display: inline-block;
+    text-align: left;
+    width: 45%;
+    margin: 10px;
+    vertical-align: top;
+}
+
+p.student-passed-chart, p.student-failed-chart {
+    display: inline-block;
+    text-align: right;
+    width: 40%;
+}
+
+h5 {
+    display: inline-block;
+    width: 50%;
+}
+

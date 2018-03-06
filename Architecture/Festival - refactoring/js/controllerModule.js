@@ -1,5 +1,6 @@
-var controllerModule = (function (data, ui, validate){
+var controllerModule = (function (data, ui){
 
+    //MOVIE CREATION EVENT HANDLER
     $(ui.selectors.createMovieBtn).click(function (){
         var movieData = ui.collectMovieData();
 
@@ -16,11 +17,12 @@ var controllerModule = (function (data, ui, validate){
         }
 
         var newMovie = newMovieAndIndex[0];
-        var newIndex = newMovieAndIndex[1];
-        ui.showMovieData(newMovie, newIndex);
+        var newMovieIndex = newMovieAndIndex[1];
+        ui.showMovieData(newMovie, newMovieIndex);
 
     })
 
+    //PROGRAM CREATION EVENT HANDLER
     $(ui.selectors.createProgramBtn).click(function (){
 
         var programData = ui.collectProgramData();
@@ -38,11 +40,12 @@ var controllerModule = (function (data, ui, validate){
         }
 
         var newProgram = newProgramAndIndex[0];
-        var newIndex = newProgramAndIndex[1];
-        ui.showProgramData(newProgram, newIndex);
+        var newProgramIndex = newProgramAndIndex[1];
+        ui.showProgramData(newProgram, newProgramIndex);
 
     })
 
+    //ADD MOVIE TO PROGRAM
     $(ui.selectors.addMovieToProgramBtn).click(function (){
 
         var selectedMovieAndProgram = ui.collectAddMovieData();
@@ -63,4 +66,4 @@ var controllerModule = (function (data, ui, validate){
         ui.updateProgramData(program, selectedMovieAndProgram.programIndex);
     })
 
-})(dataModule, uiModule, validateModule);
+})(dataModule, uiModule);
