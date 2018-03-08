@@ -12,9 +12,9 @@ var formModule = (function () {
     }
 
     function getFormData() {
-        var subject = $(".select-subject").val();
-        var studentInfoInput = $(".student-name").val();
-        var examGrade = $(".exam-grade").val();
+        var subject = $(subjectSelector).val();
+        var studentInfoInput = $(studentInfoInput).val();
+        var examGrade = $(examGrade).val();
 
         return {
             subject: subject,

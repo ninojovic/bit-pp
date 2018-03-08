@@ -7,15 +7,15 @@
 
     }
     Person.prototype.getData = function () {
-        return this.name + " " + this.surname;
+        return `${this.name} ${this.surname}`;
     }
 
-    function Seat(number, category) {
-        this.number = number || parseInt(Math.random() * (100 - 10 + 1) + 10);
-        this.category = category || "e";
+    function Seat(number = getRandomNumber(100, 10), category = "e") {
+        this.number = number;
+        this.category = category;
     }
     Seat.prototype.getData = function () {
-        return this.number + ", " + this.category.toUpperCase();
+        return `${this.number}, ${this.category.toUpperCase()}`;
     }
 
     function Passanger(personobj, seatobj) {
@@ -23,7 +23,7 @@
         this.seatobj = seatobj;
     }
     Passanger.prototype.getData = function () {
-        return this.seatobj.getData() + ", " + this.personobj.getData();
+        return `${this.seatobj.getData()}, ${this.personobj.getData()}`;
     }
 
     function Flight(relation, date) {
@@ -33,7 +33,7 @@
     }
 
     Flight.prototype.getData = function () {
-        var date = this.date.getDate() + "." + (this.date.getMonth() + 1) + "." + this.date.getFullYear();
+        var date = `${this.date.getDate()}.${(this.date.getMonth() + 1)}.${this.date.getFullYear()}`;
         var relArr = this.relation.split(" - ")
         var relRes = "";
         var temp = "";
@@ -52,15 +52,15 @@
             }
         })
 
-        return date + ", " + relRes;
+        return `${date}, ${relRes}`;
     }
 
     Flight.prototype.addPassanger = function (passanger) {
         this.listOfPassangers.push(passanger);
     }
 
-    function Airport(name) {
-        this.name = "Nikola Tesla"
+    function Airport(name = "Nikola Tesla") {
+        this.name = name;
         this.listOfFlights = [];
 
 
@@ -69,8 +69,8 @@
         this.listOfFlights.push(flight);
     }
     Airport.prototype.getData = function () {
-        var passangerCount = 0;
-        var secondRow = "";
+        let passangerCount = 0;
+        let secondRow = "";
         for (let i = 0; i < this.listOfFlights.length; i++) {
             passangerCount += this.listOfFlights[i].listOfPassangers.length;
             secondRow += "\t" + this.listOfFlights[i].getData() + "\n";
@@ -79,10 +79,15 @@
             }
         }
 
-        var firstRow = "Airport: " + this.name + ", total passangers: " + passangerCount + "\n";
+        const firstRow = `Airport: ${this.name}, total passangers: ${passangerCount}
+        `;
 
 
         return firstRow + secondRow;
+    }
+
+    function getRandomNumber (max, min) {
+        return Math.floor((max - min) * Math.random() + min);
     }
 
 
@@ -91,21 +96,21 @@
     }
 
     function createPassanger(name, surname, seat, category) {
-        var personobj = new Person(name, surname);
-        var seatobj = new Seat(seat, category);
+        const personobj = new Person(name, surname);
+        const seatobj = new Seat(seat, category);
 
         return new Passanger(personobj, seatobj);
     }
 
-    var passanger1 = createPassanger("John", "Snow", 1, "b");
-    var passanger2 = createPassanger("Cersei", "Lannister", 2, "b");
-    var passanger3 = createPassanger("Daenerys", "Targaryen", 14);
-    var passanger4 = createPassanger("Tyrion", "Lannister");
+    const passanger1 = createPassanger("John", "Snow", 1, "b");
+    const passanger2 = createPassanger("Cersei", "Lannister", 2, "b");
+    const passanger3 = createPassanger("Daenerys", "Targaryen", 14);
+    const passanger4 = createPassanger("Tyrion", "Lannister");
 
-    var flight1 = createFlight("Belgrade - New York", new Date("Oct 25 2017"));
-    var flight2 = createFlight("Barcelona - Belgrade", new Date("Nov 11 2017"));
+    const flight1 = createFlight("Belgrade - New York", new Date("Oct 25 2017"));
+    const flight2 = createFlight("Barcelona - Belgrade", new Date("Nov 11 2017"));
 
-    var airport = new Airport();
+    const airport = new Airport();
 
     flight1.addPassanger(passanger1);
     flight1.addPassanger(passanger2);

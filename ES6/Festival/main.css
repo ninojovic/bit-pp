@@ -1,0 +1,57 @@
+* {
+    font-size: 1.2rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+container {
+    display: block;
+    margin: 20px auto;
+    width: 90%;
+    text-align: center;
+}
+
+div {
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid black;
+    width: 30%;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px;
+    height: 450px;
+    overflow: auto;
+    background: #c9fcf4;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;    
+}
+
+input[type="button"] {
+    display: block;
+    margin: 20px auto;
+    width: 50%;
+    border-radius: 5px;
+    background: lightsalmon;
+    border: solid 1px black;
+    padding: 5px;
+}
+
+hr {
+    margin: 30px;
+}
+
+select[name="selectMovie"], select[name="selectProgram"] {
+    width: 80%;
+    margin: 10px 0;
+}
+
+li {
+    font-size: 1rem;
+}
