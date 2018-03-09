@@ -6,4 +6,4 @@ console.log(res);
 
 let bool = res.every(element => element % 2 === 0);
 
-console.log(bool);
+console.log(bool); 
