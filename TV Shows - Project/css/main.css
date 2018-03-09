@@ -1,0 +1,23 @@
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    background: white;
+    width: 230px;
+    border-radius: 10px;
+    border: solid 1px black;
+}
+
+.dropdown ul {
+    list-style: none;
+    padding: 5px;
+}
+
+.dropdown li {
+    padding: 3px;
+    cursor: pointer;
+}
+
+.container {
+    position: relative;
+}
