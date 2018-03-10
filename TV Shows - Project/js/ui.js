@@ -48,11 +48,11 @@ const uiModule = (() => {
             <img src=${posterURL} class="col-sm-6">
             <div class="row col-sm-6">
                 <h2 class="col-sm-12">Seasons (${seasons.length})</h2>
-                <ul class="col align-self-start">
+                <ul class="col">
                     ${seasonsList}
                 </ul>
                 <h2 class="col-sm-12">Cast:</h2>
-                <ul class="col align-self-start">
+                <ul class="col">
                     ${castList}
                 </ul>
             </div>

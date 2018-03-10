@@ -10,22 +10,10 @@
                 $(ui.selectors.card).on("click", function () {
                     const singleSearchUrl = ui.generateURL(this.id);
 
-                    $.get(singleSearchUrl)
-                        .done(({ id, name, image, _embedded, summary }) => {
-                            let show = data.createShow(id, name, image.medium, _embedded.seasons, _embedded.cast, summary);
-                            ui.createShowPage(show);
-                        })
-                        .fail(() => {
-                            ui.error();
-                        });
-
-                    ui.createShowPage(this.id);
+                    createShowPageOnSelect(singleSearchUrl);
                 });
             })
-            .fail(() => {
-                ui.error();
-            });
-
+            .fail(() => { ui.error(); });
 
         $(ui.selectors.searchInput).on("keyup", () => {
 
@@ -40,28 +28,29 @@
 
                         const singleSearchUrl = ui.generateURL(this.id);
 
-                        $.get(singleSearchUrl)
-                            .done(({ id, name, image, _embedded, summary }) => {
-
-                                let show = data.createShow(id, name, image.medium, _embedded.seasons, _embedded.cast, summary);
-
-                                ui.createShowPage(show);
-
-                            })
-                            .fail(() => {
-                                ui.error();
-                            });
+                        createShowPageOnSelect(singleSearchUrl);
                     })
+
                     $(ui.selectors.searchInput).on("blur", () => {
                         setTimeout(() => {
                             $(".dropdown").css("display", "none");
                         }, 150);
                     })
                 })
-                .fail(() => {
-                    ui.error();
-                });
+                .fail(() => { ui.error(); });
         })
+
+        
+        const createShowPageOnSelect = (singleSearchUrl) => {
+            $.get(singleSearchUrl)
+                .done(({ id, name, image, _embedded, summary }) => {
+                    let show = data.createShow(id, name, image.medium, _embedded.seasons, _embedded.cast, summary);
+                    ui.createShowPage(show);
+                })
+                .fail(() => { ui.error(); });
+
+            ui.createShowPage(this.id);
+        }
     })
 
 })(dataModule, uiModule);

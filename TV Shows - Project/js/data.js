@@ -11,6 +11,7 @@ const dataModule = (() => {
 
         return new Show(id, name, posterURL, seasonsList, actorsList, details);
     }
+
     return {
         createShow,
     }
