@@ -16,6 +16,10 @@ body {
   margin-bottom: 30px;
 }
 
+img.col-sm-6 {
+  min-height: 700px;
+}
+
 .dropdown {
   display: none;
   position: absolute;

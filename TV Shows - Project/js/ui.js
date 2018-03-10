@@ -5,9 +5,7 @@ const uiModule = (() => {
         card: ".card",
         row: ".row",
     }
-
-    const genericSearchURL = `http://api.tvmaze.com/shows`;
-
+    
     const generateSingleSearchURL = showID => `http://api.tvmaze.com/shows/${showID}?embed[]=seasons&embed[]=cast`;
 
     const searchByValueURL = () => {
@@ -17,13 +15,14 @@ const uiModule = (() => {
         return `http://api.tvmaze.com/search/shows?q=${searchValue}`;
     };
 
-    const error = () => {
+    const displayError = () => {
         alert("something went wrong");
     }
 
     const createHomePage = listOfShows => {
+        const row = $(".row");
         listOfShows.forEach(({ name, image, id }) => {
-            $(".row").append(`
+            row.append(`
             <div class="col-lg-4 col-sm-6 portfolio-item">
                 <div class="card h-100" id="${id}">
                     <img class="card-img-top" src=${image.medium} alt="${name}">
@@ -73,10 +72,9 @@ const uiModule = (() => {
 
     return {
         selectors,
-        genericSearchURL,
         generateURL: generateSingleSearchURL,
         searchByValueURL,
-        error,
+        displayError,
         createHomePage,
         createShowPage,
         createDropDownList,
