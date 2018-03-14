@@ -1,8 +1,15 @@
 const dataModule = (() => {
 
-    const createSeason = (startDate, endDate) => new Season(startDate, endDate);
+    const baseEndpoint = `http://api.tvmaze.com/shows`;
 
-    const actor = (name, surname) => new Actor(name, surname);
+    const fetchShows = (path, successCallback, errorCallback) => {
+        $.get(path)
+            .done(successCallback)
+            .fail(errorCallback);
+        // axios.get(path)
+        //     .then(successCallback)
+        //     .catch(errorCallback);
+    }
 
     const createShow = (id, name, posterURL, listOfSeasons, listOfActors, details) => {
 
@@ -14,5 +21,7 @@ const dataModule = (() => {
 
     return {
         createShow,
+        fetchShows,
+        baseEndpoint,
     }
 })();
