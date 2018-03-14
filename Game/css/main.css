@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    background: whitesmoke;
+    width: 1200px;
+}
+
+.game-window {
+    position: relative;
+    width: 1050px;
+    margin: 0 auto;
+    display: block;
+    height: 800px;
+    background: lightblue;
+    border-radius: 10px;
+}
+
+.circle {
+    border-radius: 50%;
+    position: absolute;
+    border: 1px solid gray;
+    user-select: none;
+}
+
+input {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    background: blueviolet;
+    color: white;
+    border-radius: 5px;
+    border: solid 1px gray;
+}
