@@ -1,7 +1,7 @@
 class Player {
-    constructor (name) {
+    constructor (name, points = 0) {
         this.name = name;
-        this.points = 0;
+        this.points = points;
     }
 
     addPoints (pointsToAdd) {

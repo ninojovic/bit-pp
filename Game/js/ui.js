@@ -11,7 +11,7 @@ const showCircle = ({ x, y, r, color, points }) => {
 
     return new Promise((resolve) => {
         $circle.on("click", function () {
-            $(this).fadeOut(300, function () {
+            $(this).fadeOut(700, function () {
                 this.remove();
             });
             resolve(points);
@@ -23,12 +23,20 @@ const clearGameWindow = () => {
     $(".game-window").children().remove();
 }
 
-const newGame = (player, eventHandler) => {
-    $("input").on("click", eventHandler);
+const getPlayerName = () => $("input[type='text']").val();
+
+const endGameMsg = (points) => {
+    alert(`YOUR TIME IS OUT! YOU HAVE ${points} POINTS`)
+};
+
+const gameStarted = (newGameFunction) => {
+    $("input[type='button']").on("click", newGameFunction);
 }
 
 export {
     showCircle,
     clearGameWindow,
-    newGame,
+    getPlayerName,
+    endGameMsg,
+    gameStarted,
 }

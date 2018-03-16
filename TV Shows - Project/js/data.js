@@ -15,8 +15,11 @@ const dataModule = (() => {
 
         let seasonsList = listOfSeasons.map(season => new Season(season.premiereDate, season.endDate));
         let actorsList = listOfActors.map(actor => new Actor(actor.person.name));
+        let newShow = new Show(id, name, posterURL, seasonsList, actorsList, details);
 
-        return new Show(id, name, posterURL, seasonsList, actorsList, details);
+        localStorage.setItem(id, JSON.stringify(newShow));
+        
+        return newShow;
     }
 
     return {
